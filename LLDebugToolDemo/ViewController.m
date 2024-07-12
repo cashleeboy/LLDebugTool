@@ -114,24 +114,8 @@ static NSString *const kCellID = @"cellID";
 }
 
 - (void)doNetwork {
-    __block __weak typeof(self) weakSelf = self;
-    //Network Request
-    NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1567589759362&di=20c415aa38f25ca77270c717ae988424&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201602%2F15%2F20160215231800_zrCN8.jpeg"]];
-    [urlRequest setHTTPMethod:@"GET"];
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-    [NSURLConnection sendAsynchronousRequest:urlRequest
-                                       queue:[[NSOperationQueue alloc] init]
-                           completionHandler:^(NSURLResponse *_Nullable response, NSData *_Nullable data, NSError *_Nullable connectionError) {
-                               dispatch_async(dispatch_get_main_queue(), ^{
-                                   if (!connectionError) {
-                                       UIImage *image = [[UIImage alloc] initWithData:data];
-                                       weakSelf.imgView.image = image;
-                                   }
-                               });
-                           }];
-#pragma clang diagnostic pop
-
+    self.imgView.image = [UIImage imageNamed:@"LLDebugTool.jpg"];
+    
     // Json Response
     [[NetTool shared]
             .afHTTPSessionManager GET:@"http://baike.baidu.com/api/openapi/BaikeLemmaCardApi?&format=json&appid=379020&bk_key=%E7%81%AB%E5%BD%B1%E5%BF%8D%E8%80%85&bk_length=600"
