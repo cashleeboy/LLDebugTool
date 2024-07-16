@@ -55,7 +55,7 @@ static NSString *const kCellID = @"cellID";
 
 #pragma mark - Primary
 - (void)doSomeActions {
-    [self requestPhotoAuthorization];
+//    [self requestPhotoAuthorization];
     [self requestLocationAuthorization];
     [self doSandboxIfNeeded];
     [self doCrashIfNeeded];
@@ -114,19 +114,6 @@ static NSString *const kCellID = @"cellID";
 }
 
 - (void)doNetwork {
-    self.imgView.image = [UIImage imageNamed:@"LLDebugTool.jpg"];
-    
-    // Json Response
-    [[NetTool shared]
-            .afHTTPSessionManager GET:@"http://baike.baidu.com/api/openapi/BaikeLemmaCardApi?&format=json&appid=379020&bk_key=%E7%81%AB%E5%BD%B1%E5%BF%8D%E8%80%85&bk_length=600"
-        parameters:nil
-        progress:nil
-        success:^(NSURLSessionDataTask *_Nonnull task, id _Nullable responseObject) {
-
-        }
-        failure:^(NSURLSessionDataTask *_Nullable task, NSError *_Nonnull error){
-
-        }];
 
     //NSURLSession
     NSMutableURLRequest *htmlRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:@"https://www.baidu.com"]];
@@ -314,7 +301,7 @@ static NSString *const kCellID = @"cellID";
             }
         }
     } else if (indexPath.section == 1) {
-        cell.textLabel.text = NSLocalizedString(@"test.network.request", nil);
+        cell.textLabel.text = NSLocalizedString(@"test.location", nil);
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     } else if (indexPath.section == 2) {
         cell.textLabel.text = NSLocalizedString(@"test.log", nil);
@@ -341,7 +328,7 @@ static NSString *const kCellID = @"cellID";
         cell.textLabel.text = NSLocalizedString(@"test.html", nil);
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     } else if (indexPath.section == 12) {
-        cell.textLabel.text = NSLocalizedString(@"test.location", nil);
+        cell.textLabel.text = NSLocalizedString(@"test.network.request", nil);
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     } else if (indexPath.section == 13) {
         cell.textLabel.text = NSLocalizedString(@"test.short.cut", nil);
@@ -358,7 +345,7 @@ static NSString *const kCellID = @"cellID";
             [self testWindowStyle];
         }
     } else if (indexPath.section == 1) {
-        [self testNetwork];
+        [self testLocation];
     } else if (indexPath.section == 2) {
         [self testLog];
     } else if (indexPath.section == 3) {
@@ -380,7 +367,7 @@ static NSString *const kCellID = @"cellID";
     } else if (indexPath.section == 11) {
         [self testHtml];
     } else if (indexPath.section == 12) {
-        [self testLocation];
+        [self testNetwork];
     } else if (indexPath.section == 13) {
         [self testShortCut];
     }
@@ -391,7 +378,7 @@ static NSString *const kCellID = @"cellID";
     if (section == 0) {
         return @"LLConfig";
     } else if (section == 1) {
-        return @"Network Request";
+        return @"Location";
     } else if (section == 2) {
         return @"Log";
     } else if (section == 3) {
@@ -413,7 +400,7 @@ static NSString *const kCellID = @"cellID";
     } else if (section == 11) {
         return @"Html";
     } else if (section == 12) {
-        return @"Location";
+        return @"Network Request";
     } else if (section == 13) {
         return @"Short Cut";
     }
